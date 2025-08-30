@@ -1,0 +1,271 @@
+/* Naruto Themed UI – by you ⚡
+   Fonts via Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600&display=swap');
+
+:root{
+  --naruto-orange:#ff7b00;
+  --naruto-deep:#e56a00;
+  --midnight:#121212;
+  --panel:#1b1b1b;
+  --line:#2a2a2a;
+  --leaf:#6cc24a;
+  --sand:#f7e5c3;
+  --ink:#f4f4f4;
+  --chakra:#00e0ff;
+  --error:#ff4d4f;
+  --ok:#4cd964;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  height:100%;
+}
+
+body{
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 100% -10%, rgba(255,123,0,.12), transparent 60%),
+    radial-gradient(900px 500px at -10% 100%, rgba(108,194,74,.12), transparent 60%),
+    linear-gradient(180deg,#0b0b0b, #171717 40%, #0f0f0f);
+  font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  display:grid;
+  place-items:center;
+  padding:48px 16px;
+  overflow-x:hidden;
+}
+
+/* Panel wrapper (created by JS) */
+.naruto-card{
+  width:min(720px, 92vw);
+  background:linear-gradient(180deg,#1a1a1a 0%, #161616 100%);
+  border:1px solid var(--line);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  padding:28px 26px 26px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Leaf swirl accent */
+.naruto-card::before{
+  content:"";
+  position:absolute;
+  inset:-40% -20% auto auto;
+  width:520px;height:520px;
+  border-radius:50%;
+  background:
+    radial-gradient(closest-side, rgba(255,123,0,.08), transparent 72%),
+    radial-gradient(closest-side, rgba(0,224,255,.07), transparent 70%);
+  filter:blur(2px);
+  pointer-events:none;
+}
+
+/* Header */
+h1{
+  font-family:'Bangers', cursive;
+  letter-spacing:.5px;
+  margin:0 0 .5rem 0;
+  font-size: clamp(2rem, 4vw + 1rem, 3.25rem);
+  color:var(--sand);
+  text-shadow:0 3px 0 rgba(0,0,0,.35), 0 10px 30px rgba(255,123,0,.15);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+h1 b{
+  font-weight:400;
+}
+
+h1 .kunai{
+  width:30px;height:30px;
+  display:inline-block;
+  transform:rotate(45deg);
+  background:
+    linear-gradient(135deg,#d6d6d6 0 60%, #9a9a9a 60% 100%);
+  clip-path:polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  border:1px solid #2f2f2f;
+  box-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+
+/* Tagline */
+p{
+  margin:0 0 1.25rem 0;
+  color:#d8d8d8;
+  opacity:.9;
+}
+
+/* Form grid (we'll wrap all input rows in .form-grid via JS) */
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:16px;
+}
+
+@media (max-width:700px){
+  .form-grid{ grid-template-columns:1fr; }
+}
+
+/* Each row */
+.form-row{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* Labels */
+label{
+  font-weight:600;
+  letter-spacing:.2px;
+  color:#eeeeee;
+}
+
+/* Inputs & selects */
+input, select{
+  background:#101010;
+  color:var(--ink);
+  border:1px solid #2a2a2a;
+  border-radius:14px;
+  padding:14px 14px;
+  outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease, transform .05s ease;
+  font-size:16px;
+}
+
+input::placeholder{ color:#8a8a8a; }
+
+input:focus, select:focus{
+  border-color:var(--naruto-orange);
+  box-shadow:0 0 0 4px rgba(255,123,0,.15);
+}
+
+/* Error & helper text */
+.field-msg{
+  font-size:.85rem;
+  margin-top:6px;
+  min-height:1em;
+}
+
+.field-msg.error{ color:var(--error); }
+.field-msg.ok{ color:var(--ok); }
+
+/* Button row */
+.actions{
+  grid-column:1/-1;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-top:6px;
+}
+
+button#button{
+  appearance:none;
+  border:none;
+  background:linear-gradient(180deg, var(--naruto-orange), var(--naruto-deep));
+  color:#1a1a1a;
+  font-weight:800;
+  letter-spacing:.3px;
+  border-radius:16px;
+  padding:14px 18px;
+  cursor:pointer;
+  box-shadow:0 10px 18px rgba(229,106,0,.35), inset 0 0 0 1px rgba(0,0,0,.25);
+  transform:translateY(0);
+  transition:transform .06s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+button#button:hover{ filter:brightness(1.05); }
+button#button:active{ transform:translateY(1px); }
+
+/* Outline "Submit :" label */
+.actions > label{
+  color:#bbbbbb;
+  font-weight:600;
+  opacity:.9;
+}
+
+/* Video / YouTube embed */
+.media{
+  grid-column:1/-1;
+  margin-top:8px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid #2a2a2a;
+  background:#0d0d0d;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+}
+
+.media iframe, .media video{
+  display:block;
+  width:100%;
+  height:360px;
+}
+
+/* Status toast */
+.toast{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  background:#101010;
+  color:var(--ink);
+  border:1px solid #2a2a2a;
+  padding:12px 14px;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .25s ease, transform .25s ease;
+  pointer-events:none;
+  z-index:50;
+}
+.toast.show{ opacity:1; transform:translateY(0); }
+.toast.ok{ border-color:rgba(108,194,74,.6); }
+.toast.err{ border-color:rgba(255,77,79,.7); }
+
+/* Decorative shuriken made by JS */
+.shuriken{
+  position:fixed;
+  width:18px;height:18px;
+  pointer-events:none;
+  z-index:1;
+  opacity:.8;
+  background:
+    radial-gradient(circle at 50% 50%, #cfcfcf 0 45%, #999 46% 100%);
+  clip-path:polygon(50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0 50%, 35% 35%);
+  animation:spin 6s linear infinite;
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,.6));
+}
+@keyframes spin { to{ transform:rotate(360deg); } }
+
+/* Soft chakra particles */
+.chakra{
+  position:fixed;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--chakra);
+  box-shadow:0 0 12px rgba(0,224,255,.8), 0 0 28px rgba(0,224,255,.35);
+  opacity:.8;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Small helper badge under title */
+.badge{
+  display:inline-block;
+  font-size:.8rem;
+  padding:6px 10px;
+  background:#0f0f0f;
+  border:1px solid #2a2a2a;
+  border-radius:999px;
+  margin:.25rem 0 1rem;
+  color:#ddd;
+}
+
+/* Accessibility focus ring on labels (clicking focuses inputs) */
+label:has(+ input:focus), label:has(+ select:focus){
+  text-decoration:underline dotted;
+  text-underline-offset:3px;
+}
